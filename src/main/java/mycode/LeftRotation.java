@@ -20,8 +20,6 @@ public class LeftRotation {
     }
 
     public void rotateLeftUsingReverse(int[] arr, int k) {
-        k %= arr.length;
-
         // Reverse all numbers
         reverse(arr, 0, arr.length - 1);
 
@@ -33,8 +31,6 @@ public class LeftRotation {
     }
 
     public void rotateLeftUsingBruteForce(int[] arr, int k) {
-        k %= arr.length;
-
         // Rotate the array k times
         for (int i = 0; i < k; i++) {
             int j, temp;
@@ -47,7 +43,6 @@ public class LeftRotation {
     }
 
     public void rotateLeft(int[] arr, int k) {
-        k %= arr.length;
         int[] temp = new int[k];
 
         // Store the first k elements in a temp array
@@ -67,12 +62,12 @@ public class LeftRotation {
         }
     }
 
-    public void rotateLeftUsingQueue(int d, int[] arr) {
+    public void rotateLeftUsingQueue(int k, int[] arr) {
         Queue<Integer> queue = new LinkedList<>();
         for (int j : arr) {
             queue.add(j);
         }
-        for (int i = 0; i < d; i++) {
+        for (int i = 0; i < k; i++) {
             queue.add(queue.poll());
         }
         int i = 0;
