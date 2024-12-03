@@ -26,7 +26,7 @@ public class Palindrome {
     }
 
     private boolean isAlphaNumeric (char c) {
-        if ((c >= (int) 'a' && c <= (int) 'z') || (c >= (int) '0' && c <= (int) '9')) {
+        if ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')) {
             return true;
         }
         return false;
