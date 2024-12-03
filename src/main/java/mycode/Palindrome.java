@@ -9,10 +9,10 @@ public class Palindrome {
         s = s.toLowerCase();
 
         while (start < end) {
-            while (!isAlphaNumeric(s.charAt(start))) {
+            while (start < end && !isAlphaNumeric(s.charAt(start))) {
                 start++;
             }
-            while (!isAlphaNumeric(s.charAt(end))) {
+            while (start < end && !isAlphaNumeric(s.charAt(end))) {
                 end--;
             }
             if (s.charAt(start) != s.charAt(end)) {
