@@ -28,12 +28,15 @@ public class SherlockValidString {
             }
         }
         int freq = freqMap[i];
+        // all index have the same frequency
         if (freq == freqMap[freqMap.length - 1]) {
             return "YES";
         }
+        // all index till last but one have the same frequency and last index has 1 more
         if (freq == freqMap[freqMap.length - 2] && freqMap[freqMap.length - 1] - freqMap[freqMap.length - 2] == 1) {
             return "YES";
         }
+        // there is an character with 1 frequency at the beginning and remaining all characters have same frequency
         if (i < freqMap.length - 1 && freq == 1 && freqMap[i + 1] == freqMap[freqMap.length - 1]) {
             return "YES";
         }
