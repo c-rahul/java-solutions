@@ -1,41 +1,42 @@
 package mycode;
 
-import java.util.*;
+import java.util.Arrays;
 
 public class SherlockValidString {
     public static void main(String[] args) {
         System.out.println(isValid("ibfdgaeadiaefgbhbdghhhbgdfgeiccbiehhfcggchgghadhdhagfbahhddgghbdehidbibaeaagaeeigffcebfbaieggabcfbiiedcabfihchdfabifahcbhagccbdfifhghcadfiadeeaheeddddiecaicbgigccageicehfdhdgafaddhffadigfhhcaedcedecafeacbdacgfgfeeibgaiffdehigebhhehiaahfidibccdcdagifgaihacihadecgifihbebffebdfbchbgigeccahgihbcbcaggebaaafgfedbfgagfediddghdgbgehhhifhgcedechahidcbchebheihaadbbbiaiccededchdagfhccfdefigfibifabeiaccghcegfbcghaefifbachebaacbhbfgfddeceababbacgffbagidebeadfihaefefegbghgddbbgddeehgfbhafbccidebgehifafgbghafacgfdccgifdcbbbidfifhdaibgigebigaedeaaiadegfefbhacgddhchgcbgcaeaieiegiffchbgbebgbehbbfcebciiagacaiechdigbgbghefcahgbhfibhedaeeiffebdiabcifgccdefabccdghehfibfiifdaicfedagahhdcbhbicdgibgcedieihcichadgchgbdcdagaihebbabhibcihicadgadfcihdheefbhffiageddhgahaidfdhhdbgciiaciegchiiebfbcbhaeagccfhbfhaddagnfieihghfbaggiffbbfbecgaiiidccdceadbbdfgigibgcgchafccdchgifdeieicbaididhfcfdedbhaadedfageigfdehgcdaecaebebebfcieaecfagfdieaefdiedbcadchabhebgehiidfcgahcdhcdhgchhiiheffiifeegcfdgbdeffhgeghdfhbfbifgidcafbfcd"));
         System.out.println(isValid("aabbccddeefghi"));
+        System.out.println(isValid("abbccddeeffgg"));
     }
 
     private static String isValid(String s) {
         if (s.length() == 1) {
             return "YES";
         }
-        Map<Character, Integer> freqMap = new HashMap<>();
+        int[] freqMap = new int[26];
 
         for (char c : s.toCharArray()) {
-            freqMap.put(c, freqMap.getOrDefault(c, 0) + 1);
+            freqMap[c - 'a']++;
         }
-        int freq = freqMap.get(s.charAt(0));
-        boolean reduced = false;
-        for (char c : freqMap.keySet()) {
-            int currFreq = freqMap.get(c);
-            if (currFreq == freq) {
-                continue;
-            }
-            if (!reduced) {
-                if (Math.abs(currFreq - freq) == 1){
-                    reduced = true;
-                } else if (currFreq == 1) {
-                    reduced = true;
-                } else {
-                    return "NO";
-                }
-            } else {
-                return "NO";
+        Arrays.sort(freqMap);
+
+        int i = 0;
+        // removing 0s
+        for (; i < freqMap.length; i++) {
+            if (freqMap[i] != 0) {
+                break;
             }
         }
-        return "YES";
+        int freq = freqMap[i];
+        if (freq == freqMap[freqMap.length - 1]) {
+            return "YES";
+        }
+        if (freq == freqMap[freqMap.length - 2] && freqMap[freqMap.length - 1] - freqMap[freqMap.length - 2] == 1) {
+            return "YES";
+        }
+        if (i < freqMap.length - 1 && freq == 1 && freqMap[i + 1] == freqMap[freqMap.length - 1]) {
+            return "YES";
+        }
+        return "NO";
     }
 }
