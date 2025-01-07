@@ -23,10 +23,10 @@ public class BinarySearch {
             if (arr[mid] == numberToSearch)
                 return true;
             // Update the terminal indices
-            if (arr[mid] < numberToSearch) {
-                left = mid + 1;
-            } else
+            if (arr[mid] > numberToSearch) {
                 right = mid - 1;
+            } else
+                left = mid + 1;
         }
 
         return false;
